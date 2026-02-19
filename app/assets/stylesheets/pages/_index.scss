@@ -1,0 +1,20 @@
+// Import page-specific CSS files here.
+@import "home";
+
+
+// .container{
+//   display: flex;
+//   width: 100%;
+//   margin: 0;
+// }
+.container-half{
+  flex:1;
+  height: 85vh;
+  overflow-y: auto;
+}
+
+.container-half2{
+flex:3;
+height: 85vh;
+overflow-y: auto;
+}

@@ -1,0 +1,27 @@
+<h1>List : <%= @list.name %></h1>
+--------------------------------------------------------------
+<div class="container">
+  <div class="cards">
+<% @bookmarks.where(list_id: @list.id).each do |bookmark| %>
+  <section class="mx-auto my-5" style="max-width: 15rem;">
+    <div class="card">
+      <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+        <%= image_tag bookmark.movie.poster_url, class: 'img-fluid' %>
+          <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+        </a>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title font-weight-bold">Movie Title: <%= bookmark.movie.title %></h5>
+        <p class="mb-2"><%= bookmark.movie.rating %><i class="fa fa-star text-warning" aria-hidden="true"></i></p>
+        <p >
+         Overview: <%= bookmark.movie.overview %>
+        </p>
+        <hr class="my-4" />
+        <p><i class="fas fa-quote-left"></i> Comment : <%= bookmark.comment %></p>
+        <p><%= link_to "Delete Bookmark", list_bookmark_path(@list, bookmark), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %></p>
+      </div>
+    </div>
+  </section>
+<% end %>
+</div>
+</div>

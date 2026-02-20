@@ -23,7 +23,7 @@
 <ul class="list-unstyled">
   <% @lists.each do |list| %>
     <li class= "bg-light">
-    <%= link_to list.name, list_path(list["id"]) %>
+    <%= link_to list.name, list_path(list["id"]) , style: "font-size:30px; text-decoration: none;"%>
     <%= simple_form_for [list, @bookmark] do |f| %>
   <%= f.association :movie, collection: @movies, label_method: :title, value_method: :id, prompt: "Choose a movie" %>
   <%= f.input :comment %>

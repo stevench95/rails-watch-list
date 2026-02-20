@@ -1,14 +1,12 @@
-<%= link_to "Create a movie List",  new_list_path , class: "btn btn-primary"%>
 <h1>List : <%= @lists.count %></h1>
 <div class="d-flex">
 <div class="container-half border border-end p-3">
 <h2>My Lists</h2>
 
-<ul>
+<ul class="list-unstyled">
   <% @lists.each do |list| %>
   <li>
     <%= list.id %> : <%= link_to list.name, list_path(list["id"]) %>
-
     <%= simple_form_for [list, @bookmark] do |f| %>
   <%= f.association :movie, collection: @movies, label_method: :title, value_method: :id, prompt: "Choose a movie" %>
   <%= f.input :comment %>
@@ -21,23 +19,22 @@
 <div class="container-half2">
   <div class="cards-index">
 <% @movies.each do |movie| %>
-
-    <div class="card" style="width: 400px;">
+  <div class="card-wrap">
+    <input type="checkbox" id="card-toggle-movie-<%= movie.id %>" class="card-expander" />
+    <div class="card">
       <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
         <%= image_tag movie.poster_url, class: 'img-fluid' %>
           <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
         </a>
       </div>
       <div class="card-body">
-        <h5 class="card-title font-weight-bold">Movie Title: <%= movie.title %></h5>
+        <h5 class="card-title font-weight-bold"><%= movie.title %></h5>
         <p class="mb-2"><%= movie.rating %><i class="fa fa-star text-warning" aria-hidden="true"></i></p>
-        <p >
-         Overview: <%= movie.overview %>
-        </p>
-
-        </div>
+        <p class="overview">Overview: <%= movie.overview %></p>
+        <label for="card-toggle-movie-<%= movie.id %>" class="more-info btn btn-link p-0">More info</label>
+      </div>
     </div>
-
+  </div>
 <% end %>
 </div>
 </div>

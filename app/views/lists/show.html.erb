@@ -1,27 +1,53 @@
 <h1>List : <%= @list.name %></h1>
---------------------------------------------------------------
-<div class="container">
-  <div class="cards">
+<div class="containe">
+  <div class="cards  border-top" style="overflow-y: auto; height: 85vh;">
 <% @bookmarks.where(list_id: @list.id).each do |bookmark| %>
-  <section class="mx-auto my-5" style="max-width: 15rem;">
+  <div class="card-wrap">
+    <input type="checkbox" id="card-toggle-bookmark-<%= bookmark.id %>" class="card-expander" />
     <div class="card">
       <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
         <%= image_tag bookmark.movie.poster_url, class: 'img-fluid' %>
           <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
         </a>
       </div>
-      <div class="card-body">
-        <h5 class="card-title font-weight-bold">Movie Title: <%= bookmark.movie.title %></h5>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title font-weight-bold"><%= bookmark.movie.title %></h5>
         <p class="mb-2"><%= bookmark.movie.rating %><i class="fa fa-star text-warning" aria-hidden="true"></i></p>
-        <p >
-         Overview: <%= bookmark.movie.overview %>
-        </p>
+        <p class="overview">Overview: <%= bookmark.movie.overview %></p>
+
         <hr class="my-4" />
-        <p><i class="fas fa-quote-left"></i> Comment : <%= bookmark.comment %></p>
-        <p><%= link_to "Delete Bookmark", list_bookmark_path(@list, bookmark), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %></p>
+        <p class="mb-2"><i class="fas fa-quote-left"></i> Comment : <%= bookmark.comment %></p>
+
+        <div class="card-actions">
+          <label for="card-toggle-bookmark-<%= bookmark.id %>" class="more-info btn btn-link p-0">More info</label>
+          <%= link_to "Delete", list_bookmark_path(@list, bookmark), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger btn-sm delete-bookmark" %>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
 <% end %>
 </div>
+
+  <div class="mt-4">
+    <h3>List reviews</h3>
+    <div class="mb-3">
+      <%= render @list.reviews.order(created_at: :desc) %>
+    </div>
+
+    <div class="card p-3">
+      <%= simple_form_for [@list, @list.reviews.build] do |f| %>
+        <div class="row g-2">
+            <div class="col-12 col-md-3">
+            <%= f.input :rating, as: :integer, label: 'Rating (1-5)', input_html: { min: 1, max: 5 } %>
+          </div>
+          <div class="col-12 col-md-9">
+            <%= f.input :body, as: :text, label: 'Review', input_html: { rows: 3 } %>
+          </div>
+          <div class="col-12 text-end">
+            <%= f.button :submit, 'Add review', class: 'btn btn-primary' %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>

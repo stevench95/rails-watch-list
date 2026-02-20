@@ -3,7 +3,7 @@ class ListsController < ApplicationController
 
   def index
     @lists = List.all
-    @movies = Movie.all
+    @movies = Movie.all.order(:title)
     @bookmark = Bookmark.new
   end
 

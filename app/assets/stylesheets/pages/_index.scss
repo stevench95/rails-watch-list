@@ -13,6 +13,15 @@
   overflow-y: auto;
 }
 
+/* style each list item in the My Lists column */
+.container-half ul.list-unstyled li {
+  border: 1px solid rgba(0,0,0,0.08);
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 0.5rem;
+  border-radius: 0.25rem;
+  background: #fff;
+}
+
 .container-half2{
 flex:3;
 height: 85vh;

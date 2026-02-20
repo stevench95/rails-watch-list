@@ -1,12 +1,29 @@
-<h1>List : <%= @lists.count %></h1>
+<input type="checkbox" id="layout-toggle" class="hidden-input">
+<label for="layout-toggle" class="custom-button">
+  <span class="text-a">Add movie to list</span>
+  <span class="text-b">List</span>
+</label>
 <div class="d-flex">
 <div class="container-half border border-end p-3">
-<h2>My Lists</h2>
+<h2>My Lists (<%= @lists.count %>)</h2>
 
+
+<div class="container-a">
+<div class="cardss">
+  <% @lists.each do |list| %>
+    <%= link_to list_path(list), class: 'card-linkk' do %>
+      <div class="card-categoryy" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= list.photo.attached? ? cl_image_path(list.photo.key) : 'https://ducunl0s4svtl.cloudfront.net/wp-content/uploads/2017/10/flat-clapperboard-icon_1063-38.jpg' %>')">
+        <%= list.name %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+</div>
+<div class="container-b">
 <ul class="list-unstyled">
   <% @lists.each do |list| %>
-  <li>
-    <%= list.id %> : <%= link_to list.name, list_path(list["id"]) %>
+    <li class= "bg-light">
+    <%= link_to list.name, list_path(list["id"]) %>
     <%= simple_form_for [list, @bookmark] do |f| %>
   <%= f.association :movie, collection: @movies, label_method: :title, value_method: :id, prompt: "Choose a movie" %>
   <%= f.input :comment %>
@@ -15,6 +32,9 @@
   </li>
   <% end %>
 </ul>
+</div>
+
+
 </div>
 <div class="container-half2">
   <div class="cards-index">

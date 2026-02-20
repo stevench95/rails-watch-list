@@ -1,0 +1,40 @@
+.hidden-input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.custom-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #1581f5;
+  color: white;
+  border-radius: 20px;
+  cursor: pointer;
+  user-select: none;
+  margin: 5px;
+  transition: all 0.3s ease;
+}
+
+.custom-button:hover {
+  background-color:  #1062bb;
+}
+
+.custom-button .text-b { display: none; }
+
+.hidden-input:checked ~ .d-flex .container-a { display: none; }
+.hidden-input:checked ~ .d-flex .container-b { display: block; }
+
+.hidden-input:checked + .custom-button .text-a { display: none; }
+.hidden-input:checked + .custom-button .text-b { display: inline; }
+
+.container-a { display: block; }
+.container-b { display: none; }
+
+.hidden-input:checked ~ .container-a {
+  display: none;
+}
+
+.hidden-input:checked ~ .container-b {
+  display: block;
+}

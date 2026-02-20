@@ -10,7 +10,8 @@
 require 'open-uri'
 puts "Cleaning the DB...."
 Movie.destroy_all
-# List.destroy_all
+List.destroy_all
+Bookmark.destroy_all
 
 # the Le Wagon copy of the API
 puts "Creating movies.... \n"
